@@ -12,6 +12,28 @@ Written in Python 3.
 4. `code Sketcher` to open the project in VSCode
 5. Open in Dev Container (green bar in lower left corner)
 
+## Dependencies 
+
+Dependencies are encouraged to use other libraries that must be installed. 
+
+Evaluate a dependency first by doing a manual install:
+
+```
+pip3 install pytest
+```
+
+When code is committed to the project that depends on it then add it to `requirements.txt` using the `==` operator to lock in a specific version.
+
+> pytest==7.2.0
+
+The dependency will be installed with:
+
+```
+pip3 install -r requirements.txt
+```
+
+NOTE: the installation line is run automatically when the devcontainer is created. 
+
 
 # Test
 
@@ -22,9 +44,9 @@ Written in Python 3.
 
 Expect a summary similar to ...
 
-```
-================================================== 1 passed in 0.08s ==================================================
-```
+
+> ========== 1 passed in 0.08s ==========
+
 
 ## Run Tests in VS Code
 
