@@ -9,4 +9,6 @@ def move(cm:int)->str:
 	"""Moves forward the number of centimeters given."""
 	return f"await robot.move({cm})"
 
-# define a function to move forward a certain distance
+def navigate_to(x,y:int)->str:
+	"""Navigates to the coordinants given"""
+	return f"await robot.navigate_to({x},{y})"
