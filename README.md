@@ -8,7 +8,7 @@ Written in Python 3.
 
 1. Download and install [Visual Studio Code](https://code.visualstudio.com/)
 2. Open a `terminal` or `command prompt`
-3. `git clone https://github.com/aroller/Sketcher.git` to download the project
+3. `git clone https://github.com/LillieRoller/Sketcher.git` to download the project
 4. `code Sketcher` to open the project in VSCode
 5. Open in Dev Container (green bar in lower left corner)
 
