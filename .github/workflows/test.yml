@@ -13,5 +13,13 @@ jobs:
     - name: Install Dependencies
       run: pip install -r requirements.txt
     - name: Run Tests
-      run: pytest
+      run: pytest --junitxml="reports/result.xml"
+    - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: pytest            # Name of the check run which will be created
+          path: reports/result.xml    # Path to test results
+          reporter: java-junit        # Format of test results
+
     
