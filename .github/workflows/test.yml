@@ -1,7 +1,14 @@
-steps:
-- uses: actions/checkout@v3
-- uses: actions/setup-python@v4
-  with:
-    python-version: '3.9'
-    cache: 'pip' # caching pip dependencies
-- run: pip install -r requirements.txt
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip' # caching pip dependencies
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
