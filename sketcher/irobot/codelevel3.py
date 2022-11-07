@@ -12,3 +12,9 @@ def move(cm:int)->str:
 def navigate_to(x,y:int)->str:
 	"""Navigates to the coordinants given"""
 	return f"await robot.navigate_to({x},{y})"
+
+def set_marker(Marker)->str:
+	"""Sets the marker to either up or down"""
+	Marker.UP = True
+	Marker.DOWN = False
+	return f"await robot.set_marker({Marker})"
