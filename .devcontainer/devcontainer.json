@@ -20,7 +20,8 @@
 			"extensions": [
 				"yzhang.markdown-all-in-one",
 				"bierner.markdown-mermaid",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+				"jock.svg"
 			]
 		}
 	},
