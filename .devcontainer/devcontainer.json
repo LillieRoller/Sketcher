@@ -20,9 +20,11 @@
 			"extensions": [
 				"yzhang.markdown-all-in-one",
 				"bierner.markdown-mermaid",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+				"jock.svg"
 			]
 		}
 	},
-	"postCreateCommand": "pip3 install -r requirements.txt;git config --global --add safe.directory ${containerWorkspaceFolder}"
+	"postCreateCommand": "pip3 install -r requirements.txt",
+	"postAttachCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}"
 }
