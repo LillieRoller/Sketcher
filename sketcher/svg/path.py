@@ -2,14 +2,12 @@
 
 from enum import Enum
 from dataclasses import dataclass
+from svgpathtools import Path, Line, parse_path
 
-def PathCommand(enum):
+class SegmentType(Enum):
     """defining all comands that come from SVG path element's d attribute"""
-    MOVE = "m"
-    HORIZONTAL = "h"
-    VERTICAl = "v"
-    HOME = "z"
-    LINE = "l"
+    MOVE = "move"
+    LINE = "line"
 
 @dataclass
 class Coordinate:
@@ -18,16 +16,31 @@ class Coordinate:
     y: int
 
 @dataclass
-class Destination:
+class Segment:
     """going from point A to point B"""
-    command: PathCommand
+    type: SegmentType
     coordinate: Coordinate
 
 @dataclass
 class Route:
     """series of destinations in order"""
-    destinations: list[Destination]
+    segments: list[Segment]
 
 def path_to_route(path_d_attribute:str)-> Route:
     """reading the path element's d attribute and return coordinates with the enum commands"""
-    return Route
+    dests = []
+    path = parse_path(path_d_attribute)
+    for index, line in enumerate(path):
+
+        # move to the start of the first segment only for the first segment
+        if index == 0:
+            coordinate = Coordinate(x = line.start.real, y = line.start.imag)
+            segment = Segment(type = SegmentType.MOVE, coordinate=coordinate)
+            dests.append(segment)
+
+        # draw line to the end of each segment
+        coordinate = Coordinate(x = line.end.real, y = line.end.imag)
+        segment = Segment(type = SegmentType.LINE, coordinate=coordinate)
+        dests.append(segment)
+
+    return Route(segments=dests)
