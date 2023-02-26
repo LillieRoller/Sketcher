@@ -1,6 +1,7 @@
 import asyncio
 from bleak import BleakClient
 from common.checksum import add_checksum_to_list
+import time
 
 RX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e"
 TX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"
@@ -12,8 +13,10 @@ SERIAL_NUMBER = "00002a25-0000-1000-8000-00805f9b34fb"
 drive_forward = [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 drive_forward_left = [0x01, 0x06, 0x00, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 drive_forward_distance = [0x01, 0x08, 0x00, 0x00, 0x00, 0x00, 0xa0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-drive_forward_angle = [0x01, 0x09, 0x00, 0x00, 0x00, 0x00, 0x5a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 
+rotate_angle = [0x01, 0x0c, 0x00, 0x00, 0x00, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+# not yet compatible with the 2.1 firmware version only the 2.3 which is not yet available
 navigate_to = [0x01, #dev
                0x11, #cmd
                0x00, #ID inc
@@ -34,8 +37,8 @@ async def connect(address):
         # data = bytearray(add_checksum_to_list(navigate_to))
         # data = bytearray(add_checksum_to_list(drive_forward))
         # data = bytearray(add_checksum_to_list(drive_forward_left))
-        # data = bytearray(add_checksum_to_list(drive_forward_distance))
-        data = bytearray(add_checksum_to_list(drive_forward_angle))
+        data = bytearray(add_checksum_to_list(drive_forward_distance))
+        # data = bytearray(add_checksum_to_list(rotate_angle))
         i = 0
         loop_count = 1
         while i < loop_count:
@@ -43,7 +46,7 @@ async def connect(address):
             write_result = await client.write_gatt_char(RX,data,True)
             i += 1
         print(data)
-
+        time.sleep(15)
 
 def run():
     """Connect to the robot run hard coded trials"""
