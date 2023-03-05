@@ -1,7 +1,7 @@
 import asyncio
 from bleak import BleakClient
-from common.checksum import add_checksum_to_list
-from irobot.ble_protocol import drive_forward_distance, drive_distance_packet
+from sketcher.common.checksum import add_checksum_to_list
+from sketcher.irobot.ble_protocol import drive_forward_distance, drive_distance_packet
 import time
 
 RX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e"
@@ -37,7 +37,7 @@ async def connect(address):
         # data = bytearray(add_checksum_to_list(drive_forward_left))
         # data = bytearray(add_checksum_to_list(drive_forward_distance(160)))
         # data = bytearray(add_checksum_to_list(rotate_angle))
-        data = bytearray(drive_distance_packet(16))
+        data = bytearray(drive_distance_packet(160))
         i = 0
         loop_count = 1
         while i < loop_count:
