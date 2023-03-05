@@ -1,2 +1,4 @@
 pytest==7.2.0
 svgpathtools==1.5.1
+bleak
+crc8
