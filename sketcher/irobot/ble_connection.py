@@ -1,7 +1,7 @@
 import asyncio
 from bleak import BleakClient
 from common.checksum import add_checksum_to_list
-from irobot.ble_protocol import drive_forward_distance
+from irobot.ble_protocol import drive_forward_distance, drive_distance_packet
 import time
 
 RX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e"
@@ -13,9 +13,7 @@ SERIAL_NUMBER = "00002a25-0000-1000-8000-00805f9b34fb"
 # both wheels forward 64/100 speed
 drive_forward = [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 drive_forward_left = [0x01, 0x06, 0x00, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-
 rotate_angle = [0x01, 0x0c, 0x00, 0x00, 0x00, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-
 # not yet compatible with the 2.1 firmware version only the 2.3 which is not yet available
 navigate_to = [0x01, #dev
                0x11, #cmd
@@ -28,9 +26,6 @@ navigate_to = [0x01, #dev
                ]
 
 
-
-
-
 async def connect(address):
     async with BleakClient(address) as client:
         firmware_version = await client.read_gatt_char(FIRMWARE_VERSION)
@@ -40,8 +35,9 @@ async def connect(address):
         # data = bytearray(add_checksum_to_list(navigate_to))
         # data = bytearray(add_checksum_to_list(drive_forward))
         # data = bytearray(add_checksum_to_list(drive_forward_left))
-        data = bytearray(add_checksum_to_list(drive_forward_distance(50)))
+        # data = bytearray(add_checksum_to_list(drive_forward_distance(160)))
         # data = bytearray(add_checksum_to_list(rotate_angle))
+        data = bytearray(drive_distance_packet(16))
         i = 0
         loop_count = 1
         while i < loop_count:
