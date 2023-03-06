@@ -2,6 +2,22 @@
 
 Sketcher is an [iRobot Root](https://edu.irobot.com/what-we-offer/root-robot) platform that draws line art drawn in [Google Drawings](https://en.wikipedia.org/wiki/Google_Drawings) and downloaded in [Scalable Vector Graphics](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) (SVG) format. 
 
+# Running Sketcher with Robot
+
+## Supported Environments
+
+* Runs on Mac OS with `Xcode` installed from the `App Store`.
+
+1. Open root folder from a Mac terminal
+2. run `pip3 install -r requirements.txt`
+3. `python3 src/sketcher.py`
+
+## Run Command
+
+```
+python3 src/sketcher.py
+```
+
 # Development
 
 Written in Python 3. 
@@ -55,3 +71,8 @@ Expect a summary similar to ...
 3. Push `Run Test` play icon 
 
 Results are displayed in Green passing and Red failures.
+
+
+## Continuous Testing
+
+Each push to Github runs [Tests in Github Actions](https://github.com/LillieRoller/Sketcher/actions). 
