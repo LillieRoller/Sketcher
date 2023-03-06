@@ -1,4 +1,4 @@
-from sketcher.svg.path import path_to_route, Route, Segment, Coordinate, SegmentType
+from src.svg.path import path_to_route, Route, Segment, Coordinate, SegmentType
 
 square_path_fixture = "M 1 2 H 90 V 90 H 1 Z"
 

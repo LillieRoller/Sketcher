@@ -3,6 +3,7 @@
 """
 from svg.path import path_to_route, Route, Segment, Coordinate, SegmentType
 from irobot.codelevel3 import navigate_to, set_marker, Marker
+import irobot.ble_connection as ble_connection
 
 def draw_path(path:str):
 	"""will recieve a svg path and draw the path commands"""
@@ -19,7 +20,8 @@ def draw_path(path:str):
 
 def main():
 	"""Puts together all that is needed to complete a drawing."""
-	draw_path(path = "M 0 0 H 32 V 32 H 0 L 0 0")
+	# draw_path(path = "M 0 0 H 32 V 32 H 0 L 0 0")
+	ble_connection.run()
 
 if __name__ == "__main__":
     main()
