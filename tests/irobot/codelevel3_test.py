@@ -1,5 +1,5 @@
 
-from sketcher.irobot.codelevel3 import move, navigate_to, set_marker, Marker
+from src.irobot.codelevel3 import move, navigate_to, set_marker, Marker
 
 def test_move():
 	expected = "await robot.move(16)"

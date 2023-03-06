@@ -6,13 +6,10 @@
 			"version": "lts"
 		}
 	},
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip3 install --user -r requirements.txt",
-
 	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"customizations": {
@@ -22,7 +19,24 @@
 				"bierner.markdown-mermaid",
 				"redhat.vscode-yaml",
 				"jock.svg"
-			]
+			],
+			"settings": {
+				"terminal.integrated.env.osx": {
+					"PYTHONPATH": "${workspaceFolder}/src",
+				},
+				"terminal.integrated.env.linux": {
+					"PYTHONPATH": "${workspaceFolder}/src",
+				},
+				"terminal.integrated.env.windows": {
+					"PYTHONPATH": "${workspaceFolder}/src",
+				},
+				"python.envFile": "${workspaceFolder}/.env",
+				"python.testing.pytestArgs": [
+					"tests"
+				],
+				"python.testing.unittestEnabled": false,
+				"python.testing.pytestEnabled": true
+			}
 		}
 	},
 	"postCreateCommand": "pip3 install -r requirements.txt",

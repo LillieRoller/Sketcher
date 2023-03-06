@@ -1,7 +1,7 @@
 import asyncio
 from bleak import BleakClient
-from sketcher.common.checksum import add_checksum_to_list
-from sketcher.irobot.ble_protocol import drive_forward_distance, drive_distance_packet
+from common.checksum import add_checksum_to_list
+from irobot.ble_protocol import drive_forward_distance, drive_distance_packet
 import time
 
 RX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e"

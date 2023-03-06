@@ -1,4 +1,4 @@
-from sketcher.irobot.ble_protocol import drive_forward_distance, packet, Device, Command, drive_distance_packet
+from src.irobot.ble_protocol import drive_forward_distance, packet, Device, Command, drive_distance_packet
 
 def test_drive_forward():
     expected = [0x01, 0x08, 0x00, 0x00, 0x00, 0x00, 0xa0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]

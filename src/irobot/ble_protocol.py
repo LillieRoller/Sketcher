@@ -1,5 +1,5 @@
 from enum import IntEnum
-from sketcher.common.checksum import add_checksum_to_list
+from common.checksum import add_checksum_to_list
 
 class Device(IntEnum):
     """The robot is organized into a collection of logical and independent devices.
