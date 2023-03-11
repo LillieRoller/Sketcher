@@ -47,3 +47,18 @@ def drive_distance_packet(cm: int):
     result[6] = payload[3]
     result = add_checksum_to_list(result)
     return result
+
+def rotate_angle_packet(degree):
+    decidegree = degree * 10
+    payload = list(decidegree.to_bytes(4, byteorder='big'))
+    result = packet(dev = Device.MOTORS, cmd = Command.ROTATE_ANGLE)
+    result[3] = payload[0]
+    result[4] = payload[1]
+    result[5] = payload[2]
+    result[6] = payload[3]
+    result = add_checksum_to_list(result)
+    return result
+
+
+def navigate_to(x, y):
+    """need to create equations to calculate in order for navigate_to to exist"""
