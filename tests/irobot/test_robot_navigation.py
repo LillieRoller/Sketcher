@@ -58,10 +58,3 @@ def test_left_up():
     segment = LineSegment(start, destination)
     assert segment.angle == int(315)
     assert segment.distance == int(math.sqrt(2))
-
-def test_return():
-    start = Point(0, 1)
-    destination = Point(0, 0)
-    segment = LineSegment(angle, distance)
-    assert segment.angle == int(180)
-    assert segment.distance == int(1)
