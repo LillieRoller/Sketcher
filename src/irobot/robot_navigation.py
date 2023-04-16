@@ -37,3 +37,34 @@ class LineSegment:
 
     def __str__(self) -> str:
         return f"{self.angle} {self.distance}"
+
+class Tracking:
+    """tracks the robot and its current position and direction"""
+    def __init__(self, x: int, y: int, direction: int) -> None:
+        self.x = x
+        self.y = y
+        self.direction = direction
+
+    def update_position(self, distance: int, angle: int) -> None:
+        """updates the robot's position and direction based on a positioning"""
+        # update direction
+        self.direction += angle
+        self.direction %= 360
+
+        # calculate new position
+        dx = int(distance * math.cos(math.radians(self.direction)))
+        dy = int(distance * math.sin(math.radians(self.direction)))
+        new_x = self.x + dx
+        new_y = self.y + dy
+        return new_x, new_y
+
+def course(path: list[LineSegment]) -> tuple[int, int, int]:
+    """keeps track of the position and direction of the robot as it moves along the path"""
+    track = Tracking(0,0,0)  # initialize robot position and direction
+
+    for segment in path:
+        # update robot position and direction based on segment
+        track.update_position(segment.distance, segment.angle)
+
+    # return current position and direction
+    return track.x, track.y, track.direction
