@@ -70,33 +70,6 @@ class LineSegment:
             # raise NotImplementedError(f"Not yet handling {start} and {destination}")
 
 
-       
-
-            
-
-        
-
-        # if start.x < destination.x and start.y < destination.y or start.x < destination.x and start.y > destination.y:
-        #     final_angle = inverse_cos_deg
-        # elif start.x > destination.x and start.y > destination.y or start.x > destination.x and start.y < destination.y:
-        #     counter_clockwise_angle = inverse_cos_deg
-        #     final_angle = 360 - counter_clockwise_angle
-        
-        # elif start.x == destination.x and start.y > destination.y:
-        #     final_angle = 180
-        # elif start.x == destination.x and start.y < destination.y:
-        #     final_angle = 0
-        
-        # elif start.x > destination.x and start.y == destination.y:
-        #     final_angle = 270
-        # elif start.x < destination.x and start.y == destination.y:
-        #     final_angle = 90
-
-        # self.angle = int(final_angle)
-        # self.distance = int(hypotenuse)
-        # self.start = start
-        # self.destination = destination
-
     def __str__(self) -> str:
         return f"{self.angle} {self.distance}"
 
@@ -127,7 +100,3 @@ class Tracking:
         for segment in path:
             # update robot position and direction based on segment
             self.update_position(point = segment.destination, dir = segment.angle)
-
-
-class RobotNavigator:
-    """Takes points and moves to diffferent coordinante buy using rotate and distance packets together """

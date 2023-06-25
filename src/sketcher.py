@@ -24,6 +24,8 @@ def main():
 	# draw_path(path = "M 0 0 H 32 V 32 H 0 L 0 0")
 	points=[
 		Point(16,16),
+		Point(-16,16),
+		Point(16,-16),
 		Point(0,0),
 	]
 	ble_connection.run(points)
