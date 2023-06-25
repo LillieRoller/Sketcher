@@ -127,6 +127,7 @@ class Tracking:
         for segment in path:
             # update robot position and direction based on segment
             self.update_position(point = segment.destination, dir = segment.angle)
-        
+
+
 class RobotNavigator:
     """Takes points and moves to diffferent coordinante buy using rotate and distance packets together """

@@ -19,7 +19,7 @@ rotate_angle = [0x01, 0x0c, 0x00, 0x00, 0x00, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00
 navigate_to = [0x01, 0x11, 0x00, 0x00, 0x00, 0x00, 0x00, 0xa0, 0x00, 0x00, 0x00, 0xa0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 
 # function that connects to a BLE device with a given address
-async def connect(address):
+async def connect(address,points:list[Point]):
     async with BleakClient(address) as client:
         firmware_version = await client.read_gatt_char(FIRMWARE_VERSION)
         print("Firmware version: {0}".format("".join(map(chr, firmware_version))))
@@ -42,21 +42,33 @@ async def connect(address):
         # await.client.write_gatt_char(RX,segment1_drive_distance, True)
         # time.sleep(5)
 
-        turn_around = bytearray(rotate_angle_packet(180))
-        segment1 = LineSegment(Point(0,0), Point(0,16))
-        segment1_rotate_angle = bytearray(rotate_angle_packet(segment1.angle))
-        segment1_drive_distance = bytearray(drive_distance_packet(segment1.distance))
-        segment1_finish_circle = bytearray(rotate_angle_packet(180))
-        await client.write_gatt_char(RX,segment1_rotate_angle,True)
-        time.sleep(5)
-        await client.write_gatt_char(RX,segment1_drive_distance,True)
-        time.sleep(5)
-        await client.write_gatt_char(RX,turn_around,True)
-        time.sleep(5)
-        await client.write_gatt_char(RX,segment1_drive_distance,True)
-        time.sleep(5)
-        await client.write_gatt_char(RX,segment1_finish_circle,True)
-        time.sleep(5)
+        previous_point = Point(0,0)
+        for point in points:
+
+            sec_between_instructions = 5
+            segment = LineSegment(start = previous_point, destination = point )
+            # Rotates the robot to calculated angle
+            angle_packet = bytearray(rotate_angle_packet(segment.angle))
+            await client.write_gatt_char(RX,angle_packet,True)
+            time.sleep(sec_between_instructions)
+
+
+            # droves the robot to calculated distance
+            distance_packet = bytearray(drive_distance_packet(segment.distance))
+            await client.write_gatt_char(RX,distance_packet,True)
+            time.sleep(sec_between_instructions)
+
+            reset_north = bytearray(rotate_angle_packet(-segment.angle))
+            await client.write_gatt_char(RX,reset_north,True)
+            time.sleep(sec_between_instructions)
+
+            previous_point = point
+
+
+
+
+
+
 
         # segment2 = LineSegment(Point(0,0), Point(16,16))
         # segment2_rotate_angle = bytearray(rotate_angle_packet(segment2.angle))
@@ -171,6 +183,6 @@ async def connect(address):
         #     i += 1
         # time.sleep(5)
 
-def run():
+def run(instructions:list[Point]):
     """Connect to the robot run hard coded trials"""
-    asyncio.run(connect(ROOT_ADDRESS))
+    asyncio.run(connect(ROOT_ADDRESS,instructions))

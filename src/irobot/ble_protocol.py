@@ -50,7 +50,7 @@ def drive_distance_packet(cm: int):
 
 def rotate_angle_packet(degree):
     decidegree = int(degree * 10)
-    payload = list(decidegree.to_bytes(4, byteorder='big'))
+    payload = list(decidegree.to_bytes(4, byteorder='big', signed=True))
     result = packet(dev = Device.MOTORS, cmd = Command.ROTATE_ANGLE)
     result[3] = payload[0]
     result[4] = payload[1]
