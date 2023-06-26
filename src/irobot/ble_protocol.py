@@ -36,7 +36,7 @@ def packet(dev: Device, cmd: Command, id: int = 0)->list:
 
 def drive_distance_packet(cm: int):
     """adding the vried payload for the specific drive forward packet"""
-    mm = cm * 10
+    mm = int(cm * 10)
     payload = list(mm.to_bytes(4, byteorder='big'))
     # payload:          [0][1][2][3]
     # packet : [0][1][2][3][4][5][6]
@@ -49,8 +49,8 @@ def drive_distance_packet(cm: int):
     return result
 
 def rotate_angle_packet(degree):
-    decidegree = degree * 10
-    payload = list(decidegree.to_bytes(4, byteorder='big'))
+    decidegree = int(degree * 10)
+    payload = list(decidegree.to_bytes(4, byteorder='big', signed=True))
     result = packet(dev = Device.MOTORS, cmd = Command.ROTATE_ANGLE)
     result[3] = payload[0]
     result[4] = payload[1]
@@ -58,7 +58,3 @@ def rotate_angle_packet(degree):
     result[6] = payload[3]
     result = add_checksum_to_list(result)
     return result
-
-
-def navigate_to(x, y):
-    """need to create equations to calculate in order for navigate_to to exist"""
