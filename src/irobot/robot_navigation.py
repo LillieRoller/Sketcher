@@ -16,6 +16,11 @@ def angle_formula(run: float, rise: float, hypot: float) -> float:
     # cos α = [b2 + c2 – a2]/2bc
     # α = cos-1 (b^2+c^2-a^2)/2bc
     # α = cos-1 (hypo^2+rise^2-run^2)/2(hypo)(rise)
+    if rise == 0:
+        if run >= 0:
+            return 90  # Direct right
+        else:
+            return 270  # Direct left
     step1 = hypot ** 2 + rise ** 2 - run ** 2
     step2 = step1 / (2 * hypot * rise)
     inverse_cos_rad = np.arccos(step2)
@@ -61,6 +66,10 @@ class LineSegment:
         # direct left special case avoids divide by zero
         elif rise == 0 and run < 0:
             self.angle = 270
+        elif rise > 0 and run == 0:
+            self.angle = 0
+        elif rise < 0 and run == 0:
+            self.angle = 180
         elif run < 0 and rise > 0:
             self.angle = 360 - angle_formula(run=run,rise=rise,hypot=hypot)
         elif run < 0 and rise < 0:
