@@ -50,19 +50,9 @@ def main():
 		print("Error: Must pass the path to the svg file as the first argument DUMBY")
 		sys.exit(1)
 	file_path = args[0]
-	# print(F"Reading the path from {file_path}")
-	# path = "M 0 0 H 16 V 16 H 0 L 0 0"  # Example SVG path
 	path = svg_path_from_file(file_path)
 	points = convert_path_to_points(path)
 	print(points)  # Or pass 'points' to the robot for further processing
-	# points=[
-	# Point(16,16),
-	# Point(16,-16),
-	#  (-16,-16),
-	# Point(-16,16),
-	# Point(16,16),
-	# Point(0,0),
-	# ]
 	ble_connection.run(points)
 
 if __name__ == "__main__":
